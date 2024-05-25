@@ -1,0 +1,99 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .profile-header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+        .profile-header p {
+            margin: 0;
+        }
+        .profile-content {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-content p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .profile-content hr {
+            border: 1px solid #ccc;
+        }
+        .logout-button {
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-header">
+        <h1>User Profile</h1>
+        <p>Welcome, {{ user.username }}! </p>
+    </div>
+
+    <div class="container">
+        {% if profile_type == 'buyer' %}
+    
+            <h2>Seller Details</h2>
+        </h2>ROLE:Buyer</h2>
+            <div class="profile-content">
+                {% for seller in seller_details %}
+                    <p>UserId: {{ seller.user.username }}</p>
+                    <p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p>
+                    <p>Email: {{ seller.user.email }}</p>
+                    <p>Phone Number: {{ seller.phonenumber }}</p>
+                    <p>Place: {{ seller.place }}</p>
+                    <p>Address: {{ seller.address }}</p>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% elif profile_type == 'seller' %}
+            <h2>Your Details</h2>
+        </h2>ROLE:Seller</h2>
+            <div class="profile-content">
+                {% for seller in seller_details %}
+                    <p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p>
+                    <p>Email: {{ seller.user.email }}</p>
+                    <p>Phone Number: {{ seller.phonenumber }}</p>
+                    <p>Place: {{ seller.place }}</p>
+                    <p>Address: {{ seller.address }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <a class="logout-button" href="{% url 'logout' %}">Logout</a>
+    </div>
+</body>
+</html>
