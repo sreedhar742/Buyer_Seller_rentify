@@ -64,7 +64,7 @@
 <body>
     <div class="container">
         <div class="login-form">
-            <h1>Welcome to Rentify</h1>
+            <h1><marquee>Welcome to Rentify</marquee></h1>
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
