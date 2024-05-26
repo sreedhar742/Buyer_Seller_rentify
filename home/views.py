@@ -3,6 +3,14 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserForm, BuyerForm, SellerForm
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.conf import settings
+from django.core.mail import send_mail
+from .forms import UserForm, BuyerForm
+
 def register_buyer(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -15,11 +23,21 @@ def register_buyer(request):
             buyer.user = user
             buyer.save()
             login(request, user)
+            subject = 'Welcome to Rentify!'
+            message = f'Hi {user.username}, thank you for registering on Rentify.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [user.email,]
+            try:
+                send_mail(subject, message, email_from, recipient_list)
+            except Exception as e:
+                # Optional: Add logging or user notification of email failure
+                print(f"Error sending email: {e}")
             return redirect('login')
     else:
         user_form = UserForm()
         buyer_form = BuyerForm()
     return render(request, 'register_buyer.html', {'user_form': user_form, 'buyer_form': buyer_form})
+
 
 def register_seller(request):
     if request.method == 'POST':
