@@ -67,12 +67,14 @@
     <div class="container">
         {% if profile_type == 'buyer' %}
     
-            <h2>Seller Details</h2>
-        </h2>ROLE:Buyer</h2>
+        <p>Welcome, {{ user.username }}! </p>
+        <h2>ROLE:Buyer</h2>
+        <h2>Country:{{buyer.country}}</h2>
             <div class="profile-content">
+                <h2>Seller Details</h2>
                 {% for seller in seller_details %}
                     <p>UserId: {{ seller.user.username }}</p>
-                    <p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p>
+                    <button><p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p></button>
                     <p>Email: {{ seller.user.email }}</p>
                     <p>Phone Number: {{ seller.phonenumber }}</p>
                     <p>Place: {{ seller.place }}</p>
@@ -85,7 +87,7 @@
         </h2>ROLE:Seller</h2>
             <div class="profile-content">
                 {% for seller in seller_details %}
-                    <p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p>
+                    <button><p>Full Name: {{ seller.firstname }} {{ seller.secondname }}</p></button>
                     <p>Email: {{ seller.user.email }}</p>
                     <p>Phone Number: {{ seller.phonenumber }}</p>
                     <p>Place: {{ seller.place }}</p>

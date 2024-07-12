@@ -5,12 +5,12 @@ from .models import Buyers, Sellers
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'password', 'email',]
 
 class BuyerForm(forms.ModelForm):
     class Meta:
         model = Buyers
-        fields = ['firstname', 'secondname', 'phonenumber']
+        fields = ['firstname', 'secondname', 'phonenumber',"country"]
 
 class SellerForm(forms.ModelForm):
     class Meta:
