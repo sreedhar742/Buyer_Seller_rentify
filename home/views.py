@@ -30,7 +30,6 @@ def register_buyer(request):
             try:
                 send_mail(subject, message, email_from, recipient_list)
             except Exception as e:
-                # Optional: Add logging or user notification of email failure
                 print(f"Error sending email: {e}")
             return redirect('login')
     else:
